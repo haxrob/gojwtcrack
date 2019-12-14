@@ -12,7 +12,7 @@ To run, place a token into a text file and specify this file with the -t flag.
 The dictionary file to brute force with can either be specified with the -d flag or piped in via stdin, e.g.
 
 ```
-cat rockyou.txt | ./jwtcrack -t mytoken.txt
+$ cat rockyou.txt | ./jwtcrack -t mytoken.txt
 ```
 
 Help file:
