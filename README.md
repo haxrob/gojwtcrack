@@ -1,5 +1,5 @@
 # jwtcrack
-Fast JSON Web Token (JWT) brute-force cracker. Currently supports HS256.
+Fast JSON Web Token (JWT)cracker. Currently supports dictionary attacks against HS256.
 
 ## Instructions
 
