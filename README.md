@@ -1,15 +1,19 @@
 # jwtcrack
-Fast JSON Web Token (JWT)cracker. Currently supports dictionary attacks against HS256.
+Fast JSON Web Token (JWT) cracker. Currently supports dictionary attacks against HS256.
 
-## Usage
+## Installation
 
-To build:
+Precompiled 64 bit binary files are available for Windows and Linux under [bin/](bin/)
+
+If you prefer to compile yourself:
 ```
 $ go build -o jwtcrack main.go
 ```
 
-To run, place a token into a text file and specify this file with the -t flag.
-The dictionary file to brute force with can either be specified with the -d flag or piped in via stdin, e.g.
+## Running
+
+Place a token into a text file and specify this file with the `-t` flag.
+The  file containing a list of secrets (e.g. password dictionary file) can either be specified with the `-d` flag or piped in via stdin, e.g.
 
 ```
 $ cat rockyou.txt | ./jwtcrack -t mytoken.txt
@@ -33,7 +37,7 @@ secret123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZ
 ```
 ## Benchmark
 
-Cracking a token that has the secret of the last entry in a 3.7 million long dictionary on a Intel 2.8 Ghz i5:
+Cracking a token that uses a secret contained in the last entry of 3.7 million long dictionary file on a Intel 2.8Ghz i5:
 
 | Program | Execution time |
 --- | --- |
