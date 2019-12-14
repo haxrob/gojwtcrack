@@ -1,5 +1,5 @@
 # jwtcrack
-Fast JSON Web Token (JWT) brute-force cracker in Go
+Fast JSON Web Token (JWT) brute-force cracker. Currently supports HS256.
 
 ## Instructions
 
