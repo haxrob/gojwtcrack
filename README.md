@@ -37,7 +37,8 @@ secret123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZ
 ```
 ## Benchmark
 
-Cracking a token that uses a secret contained in the last entry of 3.7 million long dictionary file on a Intel 2.8Ghz i5:
+Cracking a token that uses a secret contained in the last entry of 3.7 million long dictionary file on a Intel 2.8Ghz i5.
+Comparing against an another JWT cracking program (jwtcat - chosen arbitrarily from a Google search) shows a 48.8% speed increase.
 
 | Program | Execution time |
 --- | --- |
@@ -73,3 +74,7 @@ real	2m46.317s
 user	2m46.235s
 sys	0m0.056s
 ```
+# TODO
+
+- [ ] Support cracking multiple tokens in input text file
+- [ ] Support brute force cracking (permutations in character set)
