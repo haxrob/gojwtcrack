@@ -38,21 +38,26 @@ secret123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZ
 ## Benchmark
 
 Cracking a token that uses a secret contained in the last entry of 3.7 million long dictionary file on a Intel 2.8Ghz i5.
-Comparing against an another JWT cracking program (jwtcat - chosen arbitrarily from a Google search) shows a 48.8% speed increase.
+Comparing against an another JWT cracking program ([jwtcat](https://github.com/aress31/jwtcat) - chosen arbitrarily from a Google search) shows a 48.8% speed increase when using jwtcrack.
 
 | Program | Execution time |
 --- | --- |
 | jwtcrack | 3.4 seconds | 
 | jwtcat | 166 seconds |
 
+Dictionary size:
 ```
 $ wc -l  openwall.net-all.txt 
 3721224 openwall.net-all.txt
+```
 
+Last passphrase in dictionary file:
+```
 $ tail -1 openwall.net-all.txt 
 ex-wethouder
 ```
 
+Execution time with jwtcrack :
 ```
 time ./jwtcrack -t token.txt -d openwall.net-all.txt 
 ex-wethouder	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.L1UzzeBYF7-NCBw-_1AJ1pihxG3pbJwOfbbzG86Qhe0
@@ -62,7 +67,7 @@ user	0m9.986s
 sys	0m0.085s
 ```
 
-https://github.com/aress31/jwtcat
+Execution time with jwtcat :
 ```
 time python3 jwtcat.py -t eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.L1UzzeBYF7-NCBw-_1AJ1pihxG3pbJwOfbbzG86Qhe0 -w openwall.net-all.txt
 <.. cut ..>
@@ -74,7 +79,7 @@ real	2m46.317s
 user	2m46.235s
 sys	0m0.056s
 ```
-# TODO
+## TODO
 
 - [ ] Support cracking multiple tokens in input text file
 - [ ] Support brute force cracking (permutations in character set)
