@@ -1,13 +1,19 @@
-# jwtcrack
+# gojwtcrack
 Fast JSON Web Token (JWT) cracker. Currently supports dictionary attacks against HS256.
 
 ## Installation
+### Binaries
+Compiled 64-bit executable files for Windows, Mac and Linux are available [here](https://github.com/x1sec/gojwtcrack/releases/)
 
-Precompiled 64 bit binary files are available for Windows and Linux under [bin/](bin/)
-
+### Go get
+If you would prefer to build yourself (and Go is setup [correctly](https://golang.org/doc/install)):
+```
+go get -u github.com/x1sec/gojwtcrack
+```
+### Building from source
 If you prefer to compile yourself:
 ```
-$ go build -o jwtcrack main.go
+$ go build -o gojwtcrack main.go
 ```
 
 ## Running
@@ -16,12 +22,12 @@ Place a token into a text file and specify this file with the `-t` flag.
 The  file containing a list of secrets (e.g. password dictionary file) can either be specified with the `-d` flag or piped in via stdin, e.g.
 
 ```
-$ cat rockyou.txt | ./jwtcrack -t mytoken.txt
+$ cat rockyou.txt | ./gojwtcrack -t mytoken.txt
 ```
 
 Help file:
 ```
-Usage of ./jwtcrack:
+Usage of ./gojwtcrack:
   -c int
     	set concurrent workers (default 10)
   -d string
@@ -32,7 +38,7 @@ Usage of ./jwtcrack:
 
 Example:
 ```
-$ ./jwtcrack -t token.txt -d ~/SecLists/Passwords/xato-net-10-million-passwords-1000000.txt
+$ ./gojwtcrack -t token.txt -d ~/SecLists/Passwords/xato-net-10-million-passwords-1000000.txt
 secret123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.y3kjst36zujMF4HssVk3Uqxf_3bzumNAvOB9N0_uRV4
 ```
 ## Benchmark
@@ -42,7 +48,7 @@ Comparing against an another JWT cracking program ([jwtcat](https://github.com/a
 
 | Program | Execution time |
 --- | --- |
-| jwtcrack | 3.4 seconds | 
+| gojwtcrack | 3.4 seconds | 
 | jwtcat | 166 seconds |
 
 Dictionary size:
@@ -57,9 +63,9 @@ $ tail -1 openwall.net-all.txt
 ex-wethouder
 ```
 
-Execution time with jwtcrack :
+Execution time with gojwtcrack :
 ```
-time ./jwtcrack -t token.txt -d openwall.net-all.txt 
+time ./gojwtcrack -t token.txt -d openwall.net-all.txt 
 ex-wethouder	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.L1UzzeBYF7-NCBw-_1AJ1pihxG3pbJwOfbbzG86Qhe0
 
 real	0m3.470s
