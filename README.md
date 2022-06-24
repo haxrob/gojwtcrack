@@ -18,7 +18,7 @@ $ go build -o gojwtcrack main.go
 
 ## Running
 
-Place a token into a text file and specify this file with the `-t` flag.
+Place a token into a text file and specify this file with the `-t` flag.of course,u can also pass it with the `-s` argument.
 The  file containing a list of secrets (e.g. password dictionary file) can either be specified with the `-d` flag or piped in via stdin, e.g.
 
 ```
@@ -32,6 +32,8 @@ Usage of ./gojwtcrack:
     	set concurrent workers (default 10)
   -d string
     	Dictionary file. If ommited, will read from stdin
+  -s string
+    	Token string
   -t string
     	File containing JWT token(s)
 ```
@@ -40,6 +42,10 @@ Example:
 ```
 $ ./gojwtcrack -t token.txt -d ~/SecLists/Passwords/xato-net-10-million-passwords-1000000.txt
 secret123	eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.y3kjst36zujMF4HssVk3Uqxf_3bzumNAvOB9N0_uRV4
+```
+
+```
+$ ./gojwtcrack -s "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.pF3q46_CLIyP_1QZPpeccbs-hC4n9YW2VMBjKrSO6Wg" -d ./pass.txt
 ```
 ## Benchmark
 

@@ -16,7 +16,7 @@ import (
 
 type Header struct {
 	Typ string `json:"typ"`
-	Alg  string `json:"alg"`
+	Alg string `json:"alg"`
 }
 
 type Token struct {
@@ -33,12 +33,15 @@ func main() {
 	var tokenFile string
 	flag.StringVar(&tokenFile, "t", "", "File containing JWT token(s)")
 
+	var tokenStr string
+	flag.StringVar(&tokenStr, "s", "", "Token string")
+
 	var dictFile string
 	flag.StringVar(&dictFile, "d", "", "Dictionary file. If ommited, will read from stdin")
 
 	flag.Parse()
-	if tokenFile == "" {
-		log.Fatal("Must specify -t")
+	if tokenFile == "" && tokenStr == "" {
+		log.Fatal("Must specify -t / -s token")
 	}
 
 	var inputStream *bufio.Scanner
@@ -55,14 +58,18 @@ func main() {
 		inputStream = bufio.NewScanner(file)
 	}
 
-	file, err := os.Open(tokenFile)
-	if err != nil {
-		log.Fatal(err)
+	var t string
+	if tokenFile != "" {
+		file, err := os.Open(tokenFile)
+		if err != nil {
+			log.Fatal(err)
+		}
+		s := bufio.NewScanner(file)
+		s.Scan()
+		t = s.Text()
+	} else if tokenStr != "" {
+		t = tokenStr
 	}
-
-	s := bufio.NewScanner(file)
-	s.Scan()
-	t := s.Text()
 	crackJWT(t, workerCount, inputStream)
 }
 
